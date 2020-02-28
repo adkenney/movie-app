@@ -58,7 +58,7 @@
       <section class="jumbotron text-center">
         <div class="container">
           <h1 class="jumbotron-heading">Search For Movies</h1>
-          <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don't simply skip over it entirely.</p>
+          <p class="lead text-muted">Get details of your favorite movies on a whim.</p>
         </div>
         <div class="form-group">
             <form method="POST">
@@ -77,27 +77,24 @@
         <div class="container">          
           <div class="row">
           {% for movie_info in movie_data %}
-            <div class="col-md-4">
+            <div class="col-sm-4">
               <div class="card-flip">
                 <div class="card mb-4 box-shadow card-front">
-                  <img class="card-img-top" src="{{ movie_info.img }}" alt="Card image cap" width="50px" height="250px">
+                  <img class="card-img-top" src="{{ movie_info.img }}" alt="Card image cap">
                   <div class="card-body">
                     <h2>{{movie_info.title}}</h2>
                     <p class="card-text">{{movie_info.year}}</p>
                     <div class="d-flex justify-content-between align-items-center">
-                      <div>
-                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                      </div>
                     </div>
                   </div>
                 </div>
-                <div class="card mb-4 box-shadow card-back">
+                <div class="card sm-4 box-shadow card-back">
                   <div class="card-body">
-                    <h3>Summary</h3>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Viverra orci sagittis eu volutpat. Donec pretium vulputate sapien nec. In eu mi bibendum neque egestas congue. Bibendum ut tristique et egestas quis ipsum. A diam sollicitudin tempor id eu nisl nunc. Vel risus commodo viverra maecenas accumsan lacus. Purus semper eget duis at tellus at urna condimentum mattis. Imperdiet massa tincidunt nunc pulvinar. Dolor sit amet consectetur adipiscing.</p>
+                    <h3>Plot</h3>
+                    <p class="card-text">{{movie_info.plot}}</p>
                     <div class="d-flex justify-content-between align-items center">
                       <div>
-                        <a class="fas fa-trash text-danger" href="{% url 'delete-movie' movie_info.search_title %}"></a>
+                        <a class="fas fa-trash text-danger mr-1" href="{% url 'delete-movie' movie_info.search_title %}">Remove</a>
                       </div>
                     </div>
                   </div>

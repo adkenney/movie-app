@@ -6,8 +6,10 @@ from .forms import MovieForm
 def index(request):
 
     url = "https://imdb8.p.rapidapi.com/title/find"
+    plot_url = "https://imdb8.p.rapidapi.com/title/get-plots"
 
     querystring = 'q={}'
+    plot_querystring = 'tconst={}'
 
     headers = {
         'x-rapidapi-host': "imdb8.p.rapidapi.com",
@@ -36,9 +38,12 @@ def index(request):
             'search_title': movie.title,
             'title': response['results'][0]['title'],
             'year': response['results'][0]['year'],
-            'img': response['results'][0]['image']['url']
+            'img': response['results'][0]['image']['url'],
+            'id': response['results'][0]['id'][7:-1]
         }
 
+        plot_response = requests.get(plot_url, headers=headers, params=plot_querystring.format(movie_info['id'])).json()
+        movie_info['plot'] = plot_response['plots'][1]['text']
         movie_data.append(movie_info)
 
     context = {'movie_data': movie_data, 'form': form}
